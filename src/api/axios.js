@@ -6,7 +6,7 @@ import "nprogress/nprogress.css";
 // 🔐 BASE URL (ENV SAFE)
 // ===============================
 const BASE_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:4002/bot/v1";
+  import.meta.env.VITE_API_URL ;
 
 // 🔒 ENV VALIDATION (important)
 if (!import.meta.env.VITE_API_URL) {
