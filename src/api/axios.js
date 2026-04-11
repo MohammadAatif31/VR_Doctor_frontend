@@ -6,7 +6,7 @@ import "nprogress/nprogress.css";
 // 🔐 BASE URL (ENV SAFE)
 // ===============================
 const BASE_URL =
-  import.meta.env.VITE_API_URL ;
+  import.meta.env.VITE_API_URL || "https://vr-doctor-backend.onrender.com/bot/v1";
 
 // 🔒 ENV VALIDATION (important)
 if (!import.meta.env.VITE_API_URL) {
