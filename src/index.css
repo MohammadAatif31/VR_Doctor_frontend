@@ -1,0 +1,533 @@
+@import "tailwindcss";
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #0d0d0d;
+}
+
+/* scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* hide scrollbar */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+
+/* glass effect */
+.glass {
+  background: rgba(255,255,255,0.05);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* typing animation */
+.typing { display:flex; gap:4px; }
+.typing span {
+  width:6px;
+  height:6px;
+  background:white;
+  border-radius:50%;
+  animation:bounce 1.2s infinite;
+}
+.typing span:nth-child(2){animation-delay:0.2s}
+.typing span:nth-child(3){animation-delay:0.4s}
+
+@keyframes bounce {
+  0%,80%,100%{transform:scale(0)}
+  40%{transform:scale(1)}
+}
+
+/* premium message animation */
+@keyframes slideUpFade {
+  from {
+    opacity:0;
+    transform:translateY(20px) scale(0.95);
+  }
+  to {
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+.message-animate {
+  animation: slideUpFade .4s cubic-bezier(0.22,1,0.36,1);
+  
+}
+
+/* bubble tail */
+.bubble{position:relative}
+
+.bubble-user::after{
+  content:"";
+  position:absolute;
+  right:-6px;
+  bottom:10px;
+  border-left:8px solid #2563eb;
+  border-top:6px solid transparent;
+  border-bottom:6px solid transparent;
+}
+
+.bubble-bot::after{
+  content:"";
+  position:absolute;
+  left:-6px;
+  bottom:10px;
+  border-right:8px solid rgba(255,255,255,0.1);
+  border-top:6px solid transparent;
+  border-bottom:6px solid transparent;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+ .send-btn {   
+  border: none;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+}
+
+.send-btn:hover {
+  transform: translateY(1px);
+ background: linear-gradient(130deg, #2563EB, #4338CA);
+  
+}
+
+.send-btn:active {
+  transform: translateY(1px);
+  
+} 
+
+/* bubble*/
+
+.message-bubble {
+  animation: bubblePop 0.35s cubic-bezier(.22,1,.36,1);
+}
+
+@keyframes bubblePop {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.02);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.user-bubble{
+ animation: userSlide .35s ease;
+}
+
+.bot-bubble{
+ animation: botSlide .35s ease;
+}
+
+@keyframes userSlide{
+ from{opacity:0;transform:translateX(20px)}
+ to{opacity:1;transform:translateX(0)}
+}
+
+@keyframes botSlide{
+ from{opacity:0;transform:translateX(-20px)}
+ to{opacity:1;transform:translateX(0)}
+}
+
+ 
+/* mic animation*/
+
+.mic-recording {
+  color: red;
+  animation: micPulse 1s infinite;
+}
+
+@keyframes micPulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.15)}
+  100%{transform:scale(1)}
+}
+
+
+/* ai thinking */
+.ai-brain{
+ animation: brainPulse 1.5s infinite;
+}
+
+@keyframes brainPulse{
+ 0%{transform:scale(1)}
+ 50%{transform:scale(1.2)}
+ 100%{transform:scale(1)}
+}
+
+.typing{
+ display:flex;
+ gap:4px;
+}
+
+.typing span{
+ width:6px;
+ height:6px;
+ background:white;
+ border-radius:50%;
+ animation: typing 1.4s infinite;
+}
+
+.typing span:nth-child(2){
+ animation-delay:.2s
+}
+
+.typing span:nth-child(3){
+ animation-delay:.4s
+}
+
+@keyframes typing{
+ 0%,80%,100%{opacity:.3}
+ 40%{opacity:1}
+}
+     
+/* ===============================
+AI DOCTOR GLASS BUBBLE
+=============================== */
+
+.bot-glass{
+position: relative;
+background: rgba(255,255,255,0.05);
+-webkit-backdrop-filter: blur(14px);
+backdrop-filter: blur(14px);
+border-radius: 29px;
+padding: 14px 18px;
+color: #e5e7eb;
+border: 1px solid rgba(255,255,255,0.08);
+box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+overflow: hidden;
+animation: fadeIn 0.25s ease-in-out;
+border-bottom-left-radius: 6px ;
+}
+
+/* ===============================
+AI GLOW BORDER
+=============================== */
+
+.bot-glass::before{
+content:"";
+position:absolute;
+inset:-1px;
+border-radius:29px;
+border-bottom-left-radius: 6px ;
+padding:1px;
+background: linear-gradient(
+120deg,
+transparent,
+rgba(59,130,246,0.4),
+rgba(99,102,241,0.5),
+transparent
+);
+background-size:200% 200%;
+animation: aiGlow 6s linear infinite;
+-webkit-mask:
+linear-gradient(#fff 0 0) content-box,
+linear-gradient(#fff 0 0);
+mask:
+linear-gradient(#fff 0 0) content-box,
+linear-gradient(#fff 0 0);
+-webkit-mask-composite: xor;
+mask-composite: exclude;
+}
+
+/* ===============================
+HOVER SHIMMER
+=============================== */
+
+.bot-glass:hover::after{
+content:"";
+position:absolute;
+inset:0;
+border-radius:22px;
+background: linear-gradient(
+110deg,
+transparent 30%,
+rgba(255,255,255,0.15),
+transparent 70%
+);
+animation: shimmer 1.5s ease forwards;
+}
+
+/* ===============================
+ANIMATIONS
+=============================== */
+
+@keyframes aiGlow{
+0%{background-position:0% 50%;}
+100%{background-position:200% 50%;}
+}
+
+@keyframes shimmer{
+0%{transform:translateX(-100%);}
+100%{transform:translateX(100%);}
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(8px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+
+/* Admin Css*/
+
+/* ================= ADMIN ================= */
+.admin-container{
+max-width:1200px;
+margin:auto;
+padding:20px;
+color:white;
+}
+
+.admin-title{
+font-size:28px;
+font-weight:bold;
+margin-bottom:20px;
+text-align:center;
+}
+
+.admin-stats{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+margin-bottom:30px;
+}
+
+.admin-card{
+flex:1;
+background:#1f2937;
+padding:20px;
+border-radius:10px;
+text-align:center;
+}
+
+.admin-table{
+background:#1f2937;
+padding:20px;
+border-radius:10px;
+margin-bottom:25px;
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+padding:10px;
+text-align:left;
+border-bottom:1px solid #374151;
+}
+
+.delete-btn{
+background:#ef4444;
+border:none;
+padding:6px 12px;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+.message-preview{
+max-width:350px;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+cursor:pointer;
+color:#60a5fa;
+}
+
+/* CHAT MODAL */
+
+.chat-modal{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#111827;
+padding:25px;
+border-radius:10px;
+width:90%;
+max-width:500px;
+max-height:500px;
+overflow:auto;
+z-index:999;
+}
+
+.chat-bubble{
+background:#374151;
+padding:10px;
+border-radius:8px;
+margin-bottom:10px;
+}
+
+.chat-bubble.user{
+background:#2563eb;
+}
+
+.chat-bubble.bot{
+background:#374151;
+}
+
+.close-btn{
+margin-top:10px;
+background:#ef4444;
+border:none;
+padding:8px 14px;
+border-radius:6px;
+color:white;
+cursor:pointer;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.admin-stats{
+flex-direction:column;
+}
+
+.admin-card{
+width:100%;
+}
+
+table{
+font-size:13px;
+}
+
+}
+
+.admin-search{
+padding:10px;
+margin-bottom:10px;
+border-radius:8px;
+background:#111827;
+border:1px solid #374151;
+color:white;
+width:100%;
+}
+
+.ban-btn{
+background:#f59e0b;
+border:none;
+padding:6px 12px;
+border-radius:6px;
+color:white;
+cursor:pointer;
+margin-left:8px;
+}
+
+.chat-viewer{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#111827;
+padding:20px;
+border-radius:10px;
+width:400px;
+max-height:500px;
+overflow:auto;
+z-index:999;
+}
+
+.msg{
+padding:10px;
+margin-bottom:8px;
+border-radius:8px;
+}
+
+.msg.user{
+background:#2563eb;
+}
+
+.msg.bot{
+background:#374151;
+}
+
+.close-btn{
+margin-top:10px;
+background:#ef4444;
+border:none;
+padding:6px 12px;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+
+/*---fix--*/
+html.sidebar-open,
+body.sidebar-open {
+  overflow: hidden;
+}
+
+/* ========================= */
+/* PREMIUM POPUP ANIMATION */
+/* ========================= */
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* class */
+.animate-scaleUp {
+  animation: scaleUp 0.3s ease-out;
+}
+
+
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease;
+}
