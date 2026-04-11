@@ -40,7 +40,7 @@ const handleGoogleLogin = (e) => {
   e.preventDefault();
   setGoogleLoading(true)
   window.location.href =
-    "http://localhost:4002/bot/v1/auth/google";
+    `${import.meta.env.VITE_API_URL}/auth/google`;
 };
 
   return (
