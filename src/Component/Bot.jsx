@@ -909,7 +909,7 @@ showConfirm({
                       setInput(e.target.value);
                     }}
                     onKeyDown={handleKeyPress}
-                    placeholder="🔍Ask a health question..."
+                    placeholder="🔍Ask Symptoms..."
                     className="flex-1 bg-transparent outline-none text-white placeholder-gray-400 px-2 py-3 
                    leading-relaxed resize-none h-12  transition-all duration-400 overflow-y-auto break wrap-break-word scrollbar-hide"
                   />
