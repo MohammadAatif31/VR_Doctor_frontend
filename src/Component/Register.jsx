@@ -50,10 +50,10 @@ const handleGoogleRegister = (e) => {
       >
         <div className="flex justify-center mb-4">
   <img
-    src="/Firefly.jpg"
-    alt="logo"
-    className="w-16 h-16 rounded-full object-cover shadow-lg border-2 border-blue-600 p-1 bg-white/10 backdrop-blur-md"
-  />
+  src="/Firefly.jpg"
+  alt="logo"
+  className="w-20 h-20 rounded-full object-cover border border-blue-500"
+/>
 </div>
         <h2 className="text-2xl font-bold text-center mb-2">
           Create Account

@@ -680,7 +680,11 @@ showConfirm({
 
     {/* ✅ LEFT — LOGO + TITLE */}
     <div className="flex items-center gap-2 shrink-0">
-      <img src="/Firefly.jpg" className="w-9 h-9 rounded-full" />
+      <img
+  src="/Firefly.jpg"
+  alt="logo"
+  className="w-20 h-20 rounded-full object-cover"
+/>
       <span className="font-bold text-lg hidden sm:block ">
         VR Doctor
       </span>
