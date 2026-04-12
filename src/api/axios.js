@@ -5,8 +5,11 @@ import "nprogress/nprogress.css";
 // ===============================
 // 🔐 BASE URL (ENV SAFE)
 // ===============================
-const BASE_URL =
-  import.meta.env.VITE_API_URL || "https://vr-doctor-backend.onrender.com/bot/v1";
+const BASE_URL = import.meta.env.VITE_API_URL;
+
+if (!BASE_URL) {
+  throw new Error("❌ VITE_API_URL not set in environment");
+}
 
 // 🔒 ENV VALIDATION (important)
 if (!import.meta.env.VITE_API_URL) {
