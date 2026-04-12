@@ -52,7 +52,7 @@ const handleGoogleLogin = (e) => {
       >
         <div className="flex justify-center mb-4">
   <img
-    src="/firefly.jpg"
+    src="/Firefly.jpg"
     alt="logo"
    className="w-16 h-16 rounded-full object-cover shadow-lg border-2 border-blue-600 p-1 bg-white/10 backdrop-blur-md"
   />
