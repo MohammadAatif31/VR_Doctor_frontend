@@ -249,7 +249,7 @@ useEffect(() => {
     if (messages.length === 0 && typedRef.current) {
       typedInstance.current = new Typed(typedRef.current, {
         strings: [
-          "Virtual DOCTOR👩🏻‍⚕️",
+          "Virtual DOCTOR",
           "Your Health Assistant",
           "Ask any Symptoms",
         ],
@@ -840,10 +840,17 @@ showConfirm({
           >
             <img
   src={
-    user?.photo
-      ? user.photo.replace("/upload/", "/upload/w_200,h_200,c_fill/")
-      : "https://i.pravatar.cc/150?img=12"
-  }
+    user?.photo ? (
+  <img
+    src={user.photo.replace("/upload/", "/upload/w_200,h_200,c_fill/")}
+    alt="profile"
+    className="w-12 h-12 rounded-full object-cover border border-gray-600"
+  />
+) : (
+  <div className="w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center text-sm">
+    👤
+  </div>
+)}
   alt="profile"
   className="w-12 h-12 rounded-full object-cover object-center border border-gray-700"
 />
