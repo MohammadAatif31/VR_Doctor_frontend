@@ -15,6 +15,7 @@ function Profile() {
  const [editingPassword, setEditingPassword] = useState(false);
  const [newPassword, setNewPassword] = useState("");
    const { showConfirm, showToast, setConfirm} = useUI();
+const [loadingProfile, setLoadingProfile] = useState(true);
 
   const [form, setForm] = useState({
     name: "",
@@ -51,44 +52,77 @@ const handleLogout = () => {
     }
   });
 };
-  // ================= LOAD PROFILE =================
-  useEffect(() => {
-    const getProfile = async () => {
-      try {
-        const res = await API.get("/profile/user", {
-          withCredentials: true,
-        });
+ // ================= LOAD PROFILE =================
+useEffect(() => {
 
-       setForm(prev => ({
-  ...prev,
-  name:
-    res.data?.name && res.data.name.trim() !== ""
-      ? res.data.name
-      : user?.name || "",
-  age: res.data.age || "",
-  gender: res.data.gender || "",
-  weight: res.data.weight || "",
-  bloodGroup: res.data.bloodGroup || "",
-  allergies: res.data.allergies || "",
-  diseases: res.data.diseases || "",
-  photo: res.data?.photo && res.data.photo.trim() !== ""
-  ? res.data.photo : "https://i.pravatar.cc/150?img=12",
-}));
-        setEditing(false);
-      } catch (err) {
-        console.log(err)
-        // fallback register name
-        setForm((prev) => ({
-          ...prev,
-          name: user?.name || "",
-        }));
+  let isMounted = true; // ✅ memory leak safe
 
-        setEditing(true);
+  const getProfile = async () => {
+    try {
+      setLoadingProfile(true); // ✅ loading start
+
+      const res = await API.get("/profile/user", {
+        withCredentials: true,
+      });
+
+      const data = res?.data || {};
+
+      if (!isMounted) return;
+
+      setForm((prev) => ({
+        ...prev,
+
+        // ✅ SAFE NAME (no empty string bug)
+        name:
+          data?.name && data.name.trim() !== ""
+            ? data.name
+            : user?.name || "",
+
+        age: data?.age || "",
+        gender: data?.gender || "",
+        weight: data?.weight || "",
+        bloodGroup: data?.bloodGroup || "",
+        allergies: data?.allergies || "",
+        diseases: data?.diseases || "",
+
+        // ✅ ONLY BACKEND IMAGE (NO FALLBACK)
+        photo:
+          data?.photo && data.photo.trim() !== ""
+            ? data.photo
+            : "",
+      }));
+
+      setEditing(false);
+
+    } catch (err) {
+      console.log(err);
+
+      if (!isMounted) return;
+
+      // ✅ fallback only name (safe)
+      setForm((prev) => ({
+        ...prev,
+        name: user?.name || "",
+      }));
+
+      setEditing(true);
+
+    } finally {
+      if (isMounted) {
+        setLoadingProfile(false); // ✅ loading stop
       }
-    };
+    }
+  };
 
-    getProfile();
-  }, [user]);
+  if (user) {
+    getProfile(); // ✅ run only when user ready
+  }
+
+  return () => {
+    isMounted = false; // ✅ cleanup
+  };
+
+}, [user]);
 
   // ================= INPUT CHANGE =================
   const handleChange = (e) => {
@@ -222,14 +256,18 @@ const handleDeleteAllChats = () => {
           <div className="flex flex-col items-center gap-4">
 
             <div className="w-32 flex flex-col items-center">
-      <img
-  src={
-    form.photo instanceof File
-      ? URL.createObjectURL(form.photo)
-      : form.photo || "https://i.pravatar.cc/150"
-  }
-  className="w-28 h-28 rounded-full border-3 border-blue-600 object-cover"
-/>
+   {loadingProfile ? (
+  <div className="w-28 h-28 rounded-full bg-gray-700 animate-pulse"></div>
+) : (
+  <img
+    src={
+      form.photo instanceof File
+        ? URL.createObjectURL(form.photo)
+        : form.photo
+    }
+    className="w-28 h-28 rounded-full border-3 border-blue-600 object-cover"
+  />
+)}
               {editing && (
                 <input
                   type="file"
