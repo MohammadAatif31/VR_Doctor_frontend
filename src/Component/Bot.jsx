@@ -287,16 +287,17 @@ useEffect(() => {
 
   // copy click
   const handleCopy = (text, index) => {
-    navigator.clipboard.writeText(text);
+  if (!text) return; // ⭐ safety
 
-    setCopiedIndex(index);
+  navigator.clipboard.writeText(String(text));
 
-    // copied show → auto hide
-    setTimeout(() => {
-      setCopiedIndex(null);
-      setActiveIndex(null);
-    }, 1000);
-  };
+  setCopiedIndex(index);
+
+  setTimeout(() => {
+    setCopiedIndex(null);
+    setActiveIndex(null);
+  }, 1000);
+};
   
 
   //----voice input support--///
@@ -808,11 +809,17 @@ showConfirm({
               <button
                 key={chat._id}
                 onClick={() => handleOpenChat(chat._id)}
-                onMouseDown={() =>
-                  handleMouseDown(chat._id, chat.title || "New Chat")
-                }
-                onMouseUp={cancelLongPress}
-                onMouseLeave={cancelLongPress}
+             onMouseDown={() =>
+  handleMouseDown(chat._id, chat.title || "New Chat")
+}
+onMouseUp={cancelLongPress}
+onMouseLeave={cancelLongPress}
+
+// ⭐ MOBILE SUPPORT
+onTouchStart={() =>
+  handleMouseDown(chat._id, chat.title || "New Chat")
+}
+onTouchEnd={cancelLongPress}
                 className={`w-full text-left px-4 py-3 text-sm rounded-2xl mb-1 transition
               ${
                 currentChatId === chat._id
@@ -953,16 +960,12 @@ className={`${isRecording ? "text-red-500 animate-pulse" : ""}`} />
 : "bot-glass self-start bot-bubble rounded-bl-md "
   }`}
                 >
-                 {msg.sender === "bot" ? (
-  <div className="space-y-2">
-
-    <div className=" leading-relaxed whitespace-pre-wrap">
-      {msg.text}
-    </div>
-
+   {msg.sender === "bot" ? (
+  <div className="leading-relaxed whitespace-pre-wrap">
+    {msg.text || ""}
   </div>
 ) : (
-  msg.text
+  msg.text || ""
 )}
                   {/* Copy Button */}
                   {activeIndex === idx && (
