@@ -1088,7 +1088,7 @@ className={`${isRecording ? "text-red-500 animate-pulse" : ""}`}   />
 
       {/* PRICE */}
       <div className="text-2xl font-bold text-indigo-400 mb-4">
-        ₹199 / month
+        ₹29 / month
       </div>
 
       {/* BUTTON */}
