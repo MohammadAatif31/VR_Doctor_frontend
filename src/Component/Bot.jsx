@@ -839,11 +839,11 @@ showConfirm({
             className="flex items-center gap-3 w-full py-2 px-3 rounded-2xl border border-gray-700 hover:bg-gray-800"
           >
  <img
-  src={
-    user?.photo
-      ? user.photo.replace("/upload/", "/upload/w_200,h_200,c_fill/")
-      : ""
-  }
+src={
+  user?.photo
+    ? user.photo.replace("/upload/", "/upload/w_200,h_200,c_fill/")
+    : `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || "User")}&background=111&color=fff`
+}
   alt="profile"
   className="w-12 h-12 rounded-full object-cover object-center border border-gray-700"
 />

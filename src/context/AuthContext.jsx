@@ -23,7 +23,9 @@ export const AuthProvider = ({ children }) => {
       });
 
       // agar backend user bheje
-      setUser(res.data.user);
+      setUser({...res.data.user,
+        photo: res.data.user.photo || ""
+      });
 
     } catch (err) {
       console.log(err)
@@ -42,7 +44,9 @@ export const AuthProvider = ({ children }) => {
   // ================================
   const login = async (email, password) => {
     const res = await API.post("/auth/login", { email, password });
-    setUser(res.data.user);
+    setUser({ ...res.data.user,
+      photo: res.data.user.photo || ""
+      });
   };
 
   // ================================
@@ -56,7 +60,9 @@ export const AuthProvider = ({ children }) => {
   });
 
   // ⭐ set user after register
-  setUser(res.data.user); 
+  setUser({ ...res.data.user,
+    photo: ""
+   });
 };
 
   // ================================

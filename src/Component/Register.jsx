@@ -25,7 +25,7 @@ function Register() {
 
     try {
       await register(form.name, form.email, form.password);
-      showToast("🎉 Account created successfully","success");
+      showToast(" Account created successfully","success");
       navigate("/chat")
     } catch {
       showToast("Account created successfully", "error");

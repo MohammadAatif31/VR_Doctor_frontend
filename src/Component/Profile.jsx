@@ -260,13 +260,15 @@ const handleDeleteAllChats = () => {
   <div className="w-28 h-28 rounded-full bg-gray-700 animate-pulse"></div>
 ) : (
   <img
-    src={
-      form.photo instanceof File
-        ? URL.createObjectURL(form.photo)
-        : form.photo
-    }
-    className="w-28 h-28 rounded-full border-3 border-blue-600 object-cover"
-  />
+  src={
+    form.photo instanceof File
+      ? URL.createObjectURL(form.photo)
+      : form.photo
+      ? form.photo
+      : `https://ui-avatars.com/api/?name=${encodeURIComponent(form.name || "User")}&background=111&color=fff`
+  }
+  className="w-28 h-28 rounded-full border-3 border-blue-600 object-cover"
+/>
 )}
               {editing && (
                 <input
