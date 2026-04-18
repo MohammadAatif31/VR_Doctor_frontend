@@ -529,7 +529,7 @@ const handlePayment = async () => {
       currency: data.currency,
       order_id: data.id,
 
-      name: "AI Doctor",
+      name: "VR Doctor",
       description: "Premium Subscription",
 
       handler: async function (response) {
@@ -547,18 +547,18 @@ const handlePayment = async () => {
             setShowPremium(false);
             setRemaining("∞");
 
-            // ✅ TOAST SUCCESS
-            showToast("🎉 Premium Activated!", "success");
+            //  TOAST SUCCESS
+            showToast(" Premium Activated!", "success");
 
-            // ❌ REMOVE reload (better UX)
+            //  REMOVE reload (better UX)
             // window.location.reload();
           }
 
         } catch (err) {
           console.log(err);
 
-          // ❌ VERIFY FAILED
-          showToast("❌ Payment verification failed", "error");
+          //  VERIFY FAILED
+          showToast(" Payment verification failed", "error");
         }
       },
 
@@ -592,8 +592,8 @@ const handlePayment = async () => {
     rzp.on("payment.failed", function (response) {
       console.log("Payment failed:", response);
 
-      // ❌ FAILED TOAST
-      showToast("❌ Payment Failed", "error");
+      //  FAILED TOAST
+      showToast(" Payment Failed", "error");
     });
 
     rzp.open();
@@ -602,7 +602,7 @@ const handlePayment = async () => {
     console.log("Payment error:", err);
 
     //  INIT FAILED
-    showToast("⚠️ Payment initialization failed", "error");
+    showToast(" Payment initialization failed", "error");
   }
 };
 
@@ -701,7 +701,7 @@ showConfirm({
   {/* ========================= */}
  <div className="flex items-center gap-2">
 
-  {/* ❌ ADMIN → hide remaining */}
+  {/*  ADMIN → hide remaining */}
   {user?.role !== "admin" && (
     <span className="text-xs bg-gray-800 px-3 py-1 rounded-full text-gray-300">
       {remaining === "∞" ? "Unlimited" : `${remaining}/5`}
