@@ -299,7 +299,7 @@ return(
 <p className="text-3xl font-bold">{stats.totalHealthLogs}</p>
 </div>
 
-{/* 👑 PREMIUM */}
+{/* PREMIUM */}
 <div className="bg-linear-to-r from-yellow-500 to-orange-500 p-6 rounded-xl text-center shadow">
   <h3 className="text-white">Premium Users</h3>
   <p className="text-3xl font-bold text-white">
@@ -307,7 +307,7 @@ return(
   </p>
 </div>
 
-{/* 💰 REVENUE */}
+{/*  REVENUE */}
 <div className="bg-linear-to-r from-green-500 to-emerald-600 p-6 rounded-xl text-center shadow">
   <h3 className="text-white">Revenue</h3>
   <p className="text-3xl font-bold text-white">
@@ -348,7 +348,7 @@ Daily Chat Activity
 {/* premium user and money*/}
 <div className="mt-6 bg-gray-900 p-4 rounded-xl mb-5">
   <h2 className="text-lg font-bold text-yellow-400 mb-4 flex items-center gap-2">
-    👑 Premium Users
+     Premium Users
   </h2>
 
   {premiumUsers.length === 0 ? (

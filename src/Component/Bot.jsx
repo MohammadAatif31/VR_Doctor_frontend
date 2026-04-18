@@ -286,11 +286,11 @@ useEffect(() => {
   };
 
   // copy click
-  const handleCopy = async (text, index) => {
+const handleCopy = async (text, index) => {
   try {
     if (!text) return;
 
-    await navigator.clipboard.writeText(String(text));
+    await navigator.clipboard.writeText(text);
 
     setCopiedIndex(index);
 
@@ -303,7 +303,6 @@ useEffect(() => {
     console.log("Copy failed:", err);
   }
 };
-  
 
   //----voice input support--///
  const startVoice = () => {
@@ -332,34 +331,36 @@ useEffect(() => {
 
 
   //--steaming animation--//
- const streamMessage = (text) => {
+const streamMessage = (text) => {
+  let index = 0;
 
- let index = 0;
+  const interval = setInterval(() => {
 
- const interval = setInterval(() => {
+    setMessages(prev => {
 
-   setMessages(prev => {
+      const updated = [...prev];
 
-     const updated = [...prev];
+      const lastIndex = updated.length - 1;
+      const last = updated[lastIndex];
 
-     const last = updated[updated.length - 1];
+      if (!last || last.sender !== "bot") return prev;
 
-     if(!last || last.sender !== "bot") return prev;
+      // ⭐ IMMUTABLE UPDATE (FIX)
+      updated[lastIndex] = {
+        ...last,
+        text: text.slice(0, index + 1)
+      };
 
-     last.text = text.slice(0,index+1);
+      return updated;
+    });
 
-     return updated;
+    index++;
 
-   });
+    if (index >= text.length) {
+      clearInterval(interval);
+    }
 
-   index++;
-
-   if(index >= text.length){
-     clearInterval(interval);
-   }
-
- },12);
-
+  }, 12);
 };
 
 
@@ -975,21 +976,26 @@ className={`${isRecording ? "text-red-500 animate-pulse" : ""}`} />
   msg.text || ""
 )}
                   {/* Copy Button */}
-                  {activeIndex === idx && (
-                   <button
-  onClick={(e) => {
-    e.stopPropagation(); // ⭐ VERY IMPORTANT
-    handleCopy(msg.text, idx);
-  }}
-  onTouchStart={(e) => {
-    e.stopPropagation(); // ⭐ mobile fix
-    handleCopy(msg.text, idx);
-  }}
-  className="absolute -top-8 right-0 bg-gray-700 text-xs px-3 py-1 rounded-md"
->
-  {copiedIndex === idx ? "Copied " : "Copy"}
-</button>
-                  )}
+                 {activeIndex === idx && (
+  <button
+    onClick={(e) => {
+      e.stopPropagation(); //  important
+
+      const finalText = messages[idx]?.text || "";
+      handleCopy(finalText, idx);
+    }}
+    onTouchStart={(e) => {
+      e.stopPropagation(); //  mobile fix
+
+      const finalText = messages[idx]?.text || "";
+      handleCopy(finalText, idx);
+    }}
+    className="absolute -top-8 right-0 bg-gray-700 text-xs px-3 py-1 rounded-md"
+  >
+    {copiedIndex === idx ? "Copied " : "Copy"}
+  </button>
+)}
+                  
                 </div>
               ))}
 
