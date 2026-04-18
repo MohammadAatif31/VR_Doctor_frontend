@@ -439,7 +439,7 @@ if (remaining !== "∞") {
       }
     } catch (error) {
 
-  // ⭐ PREMIUM LIMIT HIT
+  //  PREMIUM LIMIT HIT
   if (error?.response?.status === 403) {
     setLoading(false);
     setShowPremium(true);
@@ -451,7 +451,7 @@ if (remaining !== "∞") {
     {
       text:
         error?.response?.data?.error ||
-        "⚠️ System is facing issues. Try again later.",
+        " System is facing issues. Try again later.",
       sender: "bot",
     },
   ]);
@@ -481,7 +481,7 @@ const loadRazorpay = () => {
     };
 
     script.onerror = () => {
-      console.error("❌ Razorpay failed");
+      console.error(" Razorpay failed");
       resolve(false);
     };
 
@@ -499,7 +499,7 @@ const handlePayment = async () => {
     const loaded = await loadRazorpay();
 
     if (!loaded) {
-      showToast("⚠️ Payment system failed to load", "error");
+      showToast(" Payment system failed to load", "error");
       return;
     }
 
@@ -511,7 +511,7 @@ const handlePayment = async () => {
       {},
       { 
         withCredentials: true,
-        skipLoader: true // 🔥 no full screen loader
+        skipLoader: true //  no full screen loader
       }
     );
 
@@ -529,7 +529,7 @@ const handlePayment = async () => {
       currency: data.currency,
       order_id: data.id,
 
-      name: "VR Doctor",
+      name: " VR Doctor",
       description: "Premium Subscription",
 
       handler: async function (response) {
@@ -539,7 +539,7 @@ const handlePayment = async () => {
             response,
             { 
               withCredentials: true,
-              skipLoader: true // 🔥 important
+              skipLoader: true //  important
             }
           );
 
@@ -548,7 +548,7 @@ const handlePayment = async () => {
             setRemaining("∞");
 
             //  TOAST SUCCESS
-            showToast(" Premium Activated!", "success");
+            showToast("Premium Activated!", "success");
 
             //  REMOVE reload (better UX)
             // window.location.reload();
@@ -558,7 +558,7 @@ const handlePayment = async () => {
           console.log(err);
 
           //  VERIFY FAILED
-          showToast(" Payment verification failed", "error");
+          showToast("Payment verification failed", "error");
         }
       },
 
