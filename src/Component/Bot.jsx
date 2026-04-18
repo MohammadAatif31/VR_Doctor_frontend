@@ -286,17 +286,22 @@ useEffect(() => {
   };
 
   // copy click
-  const handleCopy = (text, index) => {
-  if (!text) return; // ⭐ safety
+  const handleCopy = async (text, index) => {
+  try {
+    if (!text) return;
 
-  navigator.clipboard.writeText(String(text));
+    await navigator.clipboard.writeText(String(text));
 
-  setCopiedIndex(index);
+    setCopiedIndex(index);
 
-  setTimeout(() => {
-    setCopiedIndex(null);
-    setActiveIndex(null);
-  }, 1000);
+    setTimeout(() => {
+      setCopiedIndex(null);
+      setActiveIndex(null);
+    }, 1000);
+
+  } catch (err) {
+    console.log("Copy failed:", err);
+  }
 };
   
 
@@ -951,7 +956,9 @@ className={`${isRecording ? "text-red-500 animate-pulse" : ""}`} />
                   onMouseLeave={handleHoldEnd}
                   onTouchStart={() => handleHoldStart(idx)}
                   onTouchEnd={handleHoldEnd}
-                  onClick={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                     e.stopPropagation();
+                    }}
                   className={`relative select-none cursor-default bubble message-animate-[fadeIn_0.25s_ease-in-out] px-5 py-3 rounded-3xl max-w-[85%]
                  whitespace-pre-wrap wrap-break-word text- leading-relaxed shadow-md text-sm
   ${
@@ -969,12 +976,19 @@ className={`${isRecording ? "text-red-500 animate-pulse" : ""}`} />
 )}
                   {/* Copy Button */}
                   {activeIndex === idx && (
-                    <button
-                      onClick={() => handleCopy(msg.text, idx)}
-                      className="absolute -top-8 right-0 bg-gray-700 text-xs px-3 py-1 rounded-md"
-                    >
-                      {copiedIndex === idx ? "Copied " : "Copy"}
-                    </button>
+                   <button
+  onClick={(e) => {
+    e.stopPropagation(); // ⭐ VERY IMPORTANT
+    handleCopy(msg.text, idx);
+  }}
+  onTouchStart={(e) => {
+    e.stopPropagation(); // ⭐ mobile fix
+    handleCopy(msg.text, idx);
+  }}
+  className="absolute -top-8 right-0 bg-gray-700 text-xs px-3 py-1 rounded-md"
+>
+  {copiedIndex === idx ? "Copied " : "Copy"}
+</button>
                   )}
                 </div>
               ))}
