@@ -264,7 +264,7 @@ else if (disease.includes("brain") || disease.includes("migraine"))
         </button>
 
         <h1 className="text-xl md:text-2xl py-2 px-4 rounded-2xl border border-gray-600 font-semibold">
-          🩺VR Doctor
+          VR Doctor
         </h1>
 
       </div>
@@ -419,13 +419,13 @@ else if (disease.includes("brain") || disease.includes("migraine"))
 
         <div className="space-y-3 text-sm text-gray-300">
           {aiInsights.map((tip, index) => (
-            <p key={index}>🧠 {tip}</p>
+            <p key={index}> {tip}</p>
           ))}
         </div>
 
         <div className="mt-4 border-t border-gray-800 pt-3 text-sm">
           <p>
-            ⚠️ Risk Level :
+             Risk Level :
             <span className="ml-2 font-semibold">
               {riskLevel === "Low" && "Low Risk 🟢"}
               {riskLevel === "Medium" && "Medium Risk 🟡"}
@@ -433,7 +433,7 @@ else if (disease.includes("brain") || disease.includes("migraine"))
             </span>
           </p>
 
-          <p className="mt-2">💡 Advice : {advice}</p>
+          <p className="mt-2"> Advice : {advice}</p>
         </div>
       </div>
 
@@ -485,11 +485,11 @@ else if (disease.includes("brain") || disease.includes("migraine"))
         </div>
 
         <p className="text-sm text-gray-400 mt-2">
-          {score > 80 && "Your health is improving 📈"}
+          {score > 80 && "Your health is improving "}
 
-          {score <= 80 && score > 50 && "Health stable ⚖️"}
+          {score <= 80 && score > 50 && "Health stable "}
 
-          {score <= 50 && "Health declining ⚠️"}
+          {score <= 50 && "Health declining "}
         </p>
       </div>
 

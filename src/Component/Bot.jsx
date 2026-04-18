@@ -469,7 +469,7 @@ const loadRazorpay = () => {
     script.async = true;
 
     script.onload = () => {
-      console.log("✅ Razorpay loaded");
+      console.log(" Razorpay loaded");
       resolve(true);
     };
 
@@ -594,7 +594,7 @@ const handlePayment = async () => {
   } catch (err) {
     console.log("Payment error:", err);
 
-    // ❌ INIT FAILED
+    //  INIT FAILED
     showToast("⚠️ Payment initialization failed", "error");
   }
 };
@@ -686,7 +686,7 @@ showConfirm({
       </span>
     </div>
 
-    {/* ✅ RIGHT — ACTION BUTTONS */}
+    {/*  RIGHT — ACTION BUTTONS */}
    <div className="flex items-center gap-3 ml-auto">
 
   {/* ========================= */}
@@ -703,8 +703,8 @@ showConfirm({
 
   {/* ✅ ADMIN / PREMIUM BADGE */}
   {(user?.isPremium || user?.role === "admin") && (
-    <span className="text-xs bg-linear-to-r from-yellow-400 to-orange-500 text-black px-3 py-1 rounded-full font-semibold">
-      👑 {user.role === "admin" ? "Admin" : "Premium"}
+    <span className="text-xs bg-linear-to-r from-yellow-300 to-orange-400 text-black px-3 py-1 rounded-full font-semibold">
+       {user.role === "admin" ? "Admin" : "Premium"}
     </span>
   )}
 
@@ -899,7 +899,7 @@ showConfirm({
                 ></span>
               </div>
 
-              {/* ⭐ CENTER INPUT */}
+              {/*  CENTER INPUT */}
               <div className="w-full max-w-2xl pb-15  ">
                 <div className="flex items-end gap-2 bg-gray-900 rounded-4xl px-2.5 py-1.5 shadow-l">
                   <textarea
@@ -970,7 +970,7 @@ className={`${isRecording ? "text-red-500 animate-pulse" : ""}`} />
                       onClick={() => handleCopy(msg.text, idx)}
                       className="absolute -top-8 right-0 bg-gray-700 text-xs px-3 py-1 rounded-md"
                     >
-                      {copiedIndex === idx ? "Copied ✅" : "Copy"}
+                      {copiedIndex === idx ? "Copied " : "Copy"}
                     </button>
                   )}
                 </div>
@@ -979,7 +979,7 @@ className={`${isRecording ? "text-red-500 animate-pulse" : ""}`} />
              {loading && (
 <div className=" text-gray-200 self-start rounded-3xl px-4 py-3 flex items-center gap-2">
 
-<span className="ai-brain">🧠</span>
+<span className="ai-brain"></span>
 
 <div className="typing">
 <span></span>
@@ -1013,7 +1013,7 @@ Doctor is thinking...
                   setInput(e.target.value);
                 }}
                 onKeyDown={handleKeyPress}
-                placeholder="🧠 Ask a health question..."
+                placeholder="Ask a health question..."
                className="flex-1 bg-transparent outline-none text-white placeholder-gray-400 
             px-4 py-3 resize-none h-12  transition-all duration-500 scrollbar-hide leading-relaxed
             overflow-y-auto wrap-break-word whitespace-pre-wrap"
@@ -1044,7 +1044,7 @@ className={`${isRecording ? "text-red-500 animate-pulse" : ""}`}   />
     <div className="bg-linear-to-br from-gray-900 to-gray-800 p-6 rounded-3xl w-[90%] max-w-sm text-center shadow-2xl border border-gray-700 animate-scaleUp">
 
       {/* ICON */}
-      <div className="text-4xl mb-3">🚀</div>
+      <div className="text-4xl mb-3"></div>
 
       {/* TITLE */}
       <h2 className="text-xl font-bold text-white mb-2">
@@ -1058,9 +1058,9 @@ className={`${isRecording ? "text-red-500 animate-pulse" : ""}`}   />
 
       {/* FEATURES */}
       <div className="text-left text-sm text-gray-300 mb-5 space-y-2">
-        <p>✅ Unlimited Messages</p>
-        <p>⚡ Faster AI</p>
-        <p>🧠 Smart Diagnosis</p>
+        <p> Unlimited Messages</p>
+        <p> Faster VR Doctor</p>
+        <p> Smart Diagnosis</p>
       </div>
 
       {/* PRICE */}
