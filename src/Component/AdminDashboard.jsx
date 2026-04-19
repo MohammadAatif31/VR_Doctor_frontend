@@ -363,9 +363,11 @@ Daily Chat Activity
 
         <span className="text-gray-400">{user.email}</span>
 
-        <span className="text-yellow-400">
-          {new Date(user.premiumExpiry).toLocaleDateString()}
-        </span>
+       <span className="text-yellow-400">
+  {user.premiumExpiry
+    ? new Date(user.premiumExpiry).toLocaleDateString()
+    : "Not Activated"}
+</span>
       </div>
     ))
   )}
